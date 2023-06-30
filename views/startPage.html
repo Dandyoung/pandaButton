@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>startPage</title>
+  <link rel="stylesheet" href="./style/startPage.css">
+</head>
+<body>
+  <div class="container">
+    <div class="wrapper">
+      <img src="./images/panda.png" alt="panda">
+      <div>
+        <span class="pinkpanda">PINK<br>PANDA</span></div>
+    </div>
+    <script>
+      function moveChart(){
+          location.href = "/Chart"
+      }
+  </script>
+    <div class="btn" onclick = "goToPage()" >
+      <span>&#10148 Start analyze</span>
+      <div class="dot"></div>
+    </div>
+
+    <script>
+      function goToPage() {
+        window.location.href = "./EndPage.html";
+      }
+    </script>
+  </div>  
+</body>
+</html>

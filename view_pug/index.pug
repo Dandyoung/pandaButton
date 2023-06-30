@@ -1,0 +1,24 @@
+head
+  script(type='text/javascript' src='https://www.gstatic.com/charts/loader.js')
+  script(type='text/javascript').
+    #{script}
+  #curve_chart(style='width: 900px; height: 500px')
+  meta(charset='UTF-8')
+  meta(name='viewport' content='width=device-width, initial-scale=1.0')
+  title startPage
+  link(rel='stylesheet' href='./style/startPage.css')
+.container
+  .wrapper
+    img(src='./images/panda.png' alt='panda')
+    div
+      span.pinkpanda
+        | PINK
+        br
+        | PANDA
+  script.
+    function moveEnd(){
+    location.href = "/professor"
+    }
+  .btn(onclick='moveEnd()')
+    span 고생했어요
+    .dot

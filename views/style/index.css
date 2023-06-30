@@ -1,0 +1,59 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.btn-jelly {
+  padding: 10px 20px;
+  font-size: 16px;
+  margin: 1rem;
+  background:skyblue;
+  color:aliceblue;
+  border-radius: 20px;
+  border-color : white;
+  width : 120px;
+  height: 80px;
+
+  &:hover {
+    animation: jelly 0.5s;
+  }
+}
+
+@keyframes jelly {
+  25% {
+    transform: scale(0.9, 1.1);
+  }
+
+  50% {
+    transform: scale(1.1, 0.9);
+  }
+
+  75% {
+    transform: scale(0.95, 1.05);
+  }
+}
+
+.button:hover{
+  animation: jelly 0.5s;
+}
+
+/* @media (max-height: 300px) {
+  .container {
+    min-height: 300px;
+  }
+}
+
+@media (min-width: 300px), (min-height: 500px) {
+  .container {
+    width: 300px;
+    min-height: 500px;
+  }
+} */

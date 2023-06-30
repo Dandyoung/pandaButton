@@ -1,0 +1,148 @@
+## session-store
+
+session-store is a generic session interface for you to build a persistent (or not) store on top of. Bundled in this library you will find: 
+
+- **SessionManager**: used to create Sessions
+- **Session**: represents a sessions state
+- **Store**: simple interface to build on
+- **RedisStore**: implements the Store interface using Redis
+- **Express middleware**
+
+
+### Using with Express
+
+To use session-store with Express, you'll need the [cookie-parser](https://github.com/expressjs/cookie-parser) middleware.
+
+```javascript
+var express = require('express');
+var SS = require('session-store');
+var cookieParser = require('cookie-parser');
+
+var server = express();
+
+var SessionManager = new SS.Manager(new SS.RedisStore());
+
+server.use(cookieParser());
+
+server.use(new SS.Middleware({
+	sessionManager: SessionManager,
+	cookieKey: 'my-cookie-key',
+	salt: 'my-salt'
+}));
+
+server.get('/', function(req, res){
+	req.session.set({ someAttribute: 'foobar' });
+	res.send(200);
+});
+
+/*
+	If run after hitting GET /, this will dump:
+	
+	{
+		someAttribute: 'foobar'
+	}
+*/
+server.get('/session', function(req, res){
+	res.json(req.session);
+});
+```
+
+
+### Manager
+
+```javascript
+var SS = require('session-store');
+
+var manager = new SS.Manager();
+
+var session = manager.createSession();
+
+```
+
+#### new SS.Manager(SS.Store store)
+- ```SS.Store``` an optional object that implements the SS.Store interface
+
+
+### RedisStore
+
+```javascript
+var SS = require('session-store');
+
+var redisStore = new SS.RedisStore({
+	host: 'localhost',
+	port: 6379
+});
+```
+
+#### new SS.RedisStore(object options)
+
+- ```options``` is an object that can provide:
+	- ```host``` where your redis server is located
+	- ```port``` if you are running on the non-default port
+	
+### Session
+
+```javascript
+var SS = require('session-store');
+
+var manager = new SS.Manager();
+
+var session = manager.createSession();
+
+session.set({ someKey: 'someValue' });
+session.set('someKey', 'someValue');
+session.set('someKey', 'someValue', true);
+
+session.flush();
+
+
+session.get();
+/*
+	{
+		someKey: 'someValue'
+	}
+*/
+
+session.destroy();
+
+
+session.toJSON();
+/*
+	{
+		someKey: 'someValue'
+	}
+*/
+```
+
+#### new SS.Session(SS.Store store, string id)
+
+- ```store``` is an instance object that implements SS.Store
+- ```id``` is a unique string to identify the session
+
+#### Session.prototype.set(object data [, boolean forceFlush])
+
+- ```data``` is a object to store
+- ```forceFlush``` is a boolean to force a flush from memory to storage
+
+
+#### Session.prototype.set(string key, string value [, boolean forceFlush])
+
+Used to set a single key/value property
+
+- ```key``` the key to set
+- ```value```  the value to set the key to
+- ```forceFlush``` is a boolean to force a flush from memory to storage
+
+#### Session.prototype.flush()
+
+Flush the in-memory session to your session storage
+
+#### Session.prototype.toJSON()
+
+Returns a JSON representation of the data in the session store
+
+#### Session.prototype.destroy()
+
+Destroy the session and remove it from the store
+
+ 
