@@ -19,7 +19,7 @@ const cookieParser = require('cookie-parser');
 const studentRouter = require("./routes/studentRouter");
 const professorRouter = require("./routes/professorRouter");
 const chartRouter = require("./routes/chartRouter");
-
+// 준비
 // app.set('view engine', 'ejs');
 
 app.use(express.json());
