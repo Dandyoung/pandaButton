@@ -1,4 +1,5 @@
 "use strict";
+// 절대경로 되는지 확인하기
 
 const path = require('path');
 const professorDAO = require("../model/professorDAO");
