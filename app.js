@@ -20,6 +20,7 @@ const studentRouter = require("./routes/studentRouter");
 const professorRouter = require("./routes/professorRouter");
 const chartRouter = require("./routes/chartRouter");
 // 준비
+// 안쓰긴 하는데 view 엔진 ejs 뭔지 알고있기
 // app.set('view engine', 'ejs');
 
 app.use(express.json());
